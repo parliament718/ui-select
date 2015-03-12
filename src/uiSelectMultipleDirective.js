@@ -90,7 +90,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
                       return true;
                   }
               }
-              if (result == value){
+              if (angular.equals(result,value)){
                 resultMultiple.unshift(list[p]);
                 return true;
               }
