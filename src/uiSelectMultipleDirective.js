@@ -79,11 +79,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
         if (data){
           var resultMultiple = [];
           var checkFnMultiple = function(list, value){
-            //if the list is empty add the value to the list
-            if (!list || !list.length){
-                resultMultiple.unshift(value);
-                return true;
-            }
+            if (!list || !list.length) return;
             for (var p = list.length - 1; p >= 0; p--) {
               locals[$select.parserResult.itemName] = list[p];
               result = $select.parserResult.modelMapper(scope, locals);
@@ -103,7 +99,9 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
           };
           if (!inputValue) return resultMultiple; //If ngModel was undefined
           for (var k = inputValue.length - 1; k >= 0; k--) {
+            //Check model array of currently selected items 
             if (!checkFnMultiple($select.selected, inputValue[k])){
+              //Check model array of all items available
               checkFnMultiple(data, inputValue[k]);
             }
           }
