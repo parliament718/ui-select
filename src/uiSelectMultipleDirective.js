@@ -102,7 +102,10 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
             //Check model array of currently selected items 
             if (!checkFnMultiple($select.selected, inputValue[k])){
               //Check model array of all items available
-              checkFnMultiple(data, inputValue[k]);
+              if (!checkFnMultiple(data, inputValue[k])){
+                //If not found on previous lists, just add it directly to resultMultiple
+                resultMultiple.unshift(inputValue[k]);
+              }
             }
           }
           return resultMultiple;
