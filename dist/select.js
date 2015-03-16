@@ -537,19 +537,23 @@ uis.controller('uiSelectCtrl',
         var locals = {};
         locals[ctrl.parserResult.itemName] = item;
 
-        if(ctrl.multiple) {
-          ctrl.selected.push(item);
-          ctrl.sizeSearchInput();
-        } else {
-          ctrl.selected = item;
-        }
-
         $timeout(function(){
-          ctrl.onSelectCallback($scope, {
+          var setValue = ctrl.onSelectCallback($scope, {
             $item: item,
             $model: ctrl.parserResult.modelMapper($scope, locals)
           });
+          
+          if(setValue) {
+            if(ctrl.multiple) {
+              ctrl.selected.push(item);
+              ctrl.sizeSearchInput();
+            } else {
+              ctrl.selected = item;
+            }
+          }
         });
+        
+        
 
         if (!ctrl.multiple || ctrl.closeOnSelect) {
           ctrl.close(skipFocusser);
