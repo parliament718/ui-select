@@ -543,7 +543,7 @@ uis.controller('uiSelectCtrl',
             $model: ctrl.parserResult.modelMapper($scope, locals)
           });
           
-          if(setValue) {
+          if(setValue !== false) {
             if(ctrl.multiple) {
               ctrl.selected.push(item);
               ctrl.sizeSearchInput();
